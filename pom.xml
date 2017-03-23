@@ -1,0 +1,374 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>Ge Yao</groupId>
+  <artifactId>SSMTemplate</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>SSMTemplate Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <!--指定编码与JDK版本-->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <javax.version>7.0</javax.version>
+    <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+    <!-- spring版本号 -->
+    <spring.version>4.3.5.RELEASE</spring.version>
+    <!-- log4j日志文件管理包版本 -->
+    <slf4j.version>1.7.24</slf4j.version>
+    <log4j.version>1.2.17</log4j.version>
+    <!--log4j2日志管理-->
+    <log4j2.version>2.8</log4j2.version>
+    <!-- junit版本号 -->
+    <junit.version>4.12</junit.version>
+    <!-- struts2版本号 -->
+    <struts2.version>2.5.10</struts2.version>
+    <struts2-spring-plugin>2.5.1</struts2-spring-plugin>
+    <!--MyBatis版本号-->
+    <mybatis.version>3.4.2</mybatis.version>
+    <mybatis-spring.version>1.3.1</mybatis-spring.version>
+    <!--MySQL版本号-->
+    <mysql.version>5.1.40</mysql.version>
+    <!--dom4j版本号-->
+    <dom4j.version>1.6.1</dom4j.version>
+    <!--AspectJ版本号-->
+    <aspectj.version>1.8.10</aspectj.version>
+    <aopalliance.version>1.0</aopalliance.version>
+    <!--EhCache版本号-->
+    <ehcache.version>2.10.1</ehcache.version>
+    <ehcache.core.version>2.4.7</ehcache.core.version>
+    <ehcache.spring.annotations.version>1.1.2</ehcache.spring.annotations.version>
+
+    <jstl.version>1.2</jstl.version>
+      <!--文件上传-->
+    <commons-fileupload.version>1.3.2</commons-fileupload.version>
+    <commons-codec.version>1.9</commons-codec.version>
+
+    <javax.servlet.version>4.0.0-b03</javax.servlet.version>
+    <net.json.version>2.4</net.json.version>
+
+    <c3p0.version>0.9.1.2</c3p0.version>
+    <hibernate-c3p0.version>5.2.9.Final</hibernate-c3p0.version>
+    <mchange-commons-java.version>0.2.12</mchange-commons-java.version>
+    <tomcat.classloader.version>2.1.0</tomcat.classloader.version>
+  </properties>
+
+
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <!-- 表示开发的时候引入，发布的时候不会加载此包 -->
+      <scope>test</scope>
+    </dependency>
+
+      <!-- javaee-api -->
+      <dependency>
+          <groupId>javax</groupId>
+          <artifactId>javaee-api</artifactId>
+          <version>${javax.version}</version>
+      </dependency>
+
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>${javax.servlet-api.version}</version>
+      </dependency>
+
+
+
+
+      <!-- 添加SSM依赖 -->
+      <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+      <dependency>
+          <groupId>org.mybatis</groupId>
+          <artifactId>mybatis</artifactId>
+          <version>${mybatis.version}</version>
+      </dependency>
+
+      <!-- MyBatis整合Spring中间件jar包 -->
+      <dependency>
+          <groupId>org.mybatis</groupId>
+          <artifactId>mybatis-spring</artifactId>
+          <version>${mybatis-spring.version}</version>
+      </dependency>
+
+
+
+
+
+      <!--mysql-->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.version}</version>
+    </dependency>
+
+    <!--xml解析支持-->
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+      <version>${dom4j.version}</version>
+    </dependency>
+
+
+    <!-- 添加Spring依赖 -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-oxm</artifactId>
+          <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-tx</artifactId>
+          <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-webmvc</artifactId>
+          <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-aop</artifactId>
+          <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context-support</artifactId>
+          <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-test</artifactId>
+          <version>${spring.version}</version>
+      </dependency>
+
+
+      <!--EhCache-Spring缓存机制需要下面2个依赖-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <!--<dependency>-->
+    <!--<groupId>net.sf.ehcache</groupId>-->
+    <!--<artifactId>ehcache</artifactId>-->
+    <!--<version>${ehcache.version}</version>-->
+    <!--</dependency>-->
+
+    <dependency>
+      <groupId>com.googlecode.ehcache-spring-annotations</groupId>
+      <artifactId>ehcache-spring-annotations</artifactId>
+      <version>${ehcache.spring.annotations.version}</version>
+      <type>jar</type>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>net.sf.ehcache</groupId>
+      <artifactId>ehcache-core</artifactId>
+      <version>${ehcache.core.version}</version>
+    </dependency>
+
+
+
+
+    <!--<dependency>-->
+    <!--<groupId>org.slf4j</groupId>-->
+    <!--<artifactId>slf4j-nop</artifactId>-->
+    <!--<version>${slf4j.version}</version>-->
+    <!--</dependency>-->
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+
+    <!--c3p0连接池-->
+    <dependency>
+      <groupId>c3p0</groupId>
+      <artifactId>c3p0</artifactId>
+      <version>${c3p0.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${javax.servlet.version}</version>
+    </dependency>
+      <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0 -->
+      <dependency>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-c3p0</artifactId>
+          <version>${hibernate-c3p0.version}</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/com.mchange/mchange-commons-java -->
+      <dependency>
+          <groupId>com.mchange</groupId>
+          <artifactId>mchange-commons-java</artifactId>
+          <version>${mchange-commons-java.version}</version>
+      </dependency>
+
+
+
+      <!-- 文件上传 -->
+      <dependency>
+          <groupId>commons-fileupload</groupId>
+          <artifactId>commons-fileupload</artifactId>
+          <version>${commons-fileupload.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>commons-codec</groupId>
+          <artifactId>commons-codec</artifactId>
+          <version>${commons-codec.version}</version>
+      </dependency>
+
+
+
+      <!--防止tomcat内存泄漏-->
+    <dependency>
+      <groupId>se.jiderhamn.classloader-leak-prevention</groupId>
+      <artifactId>classloader-leak-prevention-servlet</artifactId>
+      <version>${tomcat.classloader.version}</version>
+    </dependency>
+
+    <!--JSON-->
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <version>${net.json.version}</version>
+      <classifier>jdk15</classifier>
+    </dependency>
+
+
+    <!-- AspectJ 与AOP-->
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>${aspectj.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjtools</artifactId>
+      <version>${aspectj.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>${aspectj.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>aopalliance</groupId>
+      <artifactId>aopalliance</artifactId>
+      <version>${aopalliance.version}</version>
+    </dependency>
+
+    <!--lo4j2日志-->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+
+
+      <!-- ＪＳＴＬ 标签库 -->
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>jstl</artifactId>
+          <version>${jstl.version}</version>
+      </dependency>
+
+
+
+
+
+
+
+
+  </dependencies>
+  <build>
+    <finalName>SSMTemplate</finalName>
+
+    <!--<plugins>-->
+    <!--<plugin>-->
+
+    <!--<groupId>org.apache.tomcat.maven</groupId>-->
+    <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
+    <!--<version>2.2</version>-->
+    <!--<configuration>-->
+
+    <!--<url>http://localhost:8080/manager/text</url>-->
+    <!--<server>tomcat7</server>-->
+    <!--下面这俩是根据你的tomcat配置决定的,仅当你需要远程部署时使用-->
+    <!--<username></username>-->
+    <!--<password></password>-->
+    <!--<update>true</update>-->
+    <!--<path>/</path>-->
+
+    <!--</configuration>-->
+
+    <!--</plugin>-->
+    <!--</plugins>-->
+
+  </build>
+</project>
