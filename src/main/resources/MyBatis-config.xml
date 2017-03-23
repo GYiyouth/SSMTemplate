@@ -14,18 +14,34 @@
         http://mybatis.org/schema/mybatis-spring
         http://mybatis.org/schema/mybatis-spring.xsd">
 
+    <!--使用一个属性文件配置-->
+    <bean id="configBean" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location"><value>classpath:mapper-config.properties</value></property>
+    </bean>
+
     <!--MyBatis注解式接口扫描包-->
-    <mybatis:scan base-package="mybatis.mapper"/>
+    <mybatis:scan base-package="persistence.mybatis.interfaces"/>
     <!--加载数据源参数-->
     <context:property-override location="classpath:MySQLDB1.properties"/>
     <!--配置c3p0数据源-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"/>
     <!--Mybatis整合Spring-->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
-          p:dataSource-ref="dataSource"/>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--指明mapper所在的位置-->
+        <property name="mapperLocations"><value>${mapperLocations}</value></property>
+        <!--指明别名可以用的package-->
+        <property name="typeAliasesPackage"><value>${typeAliasesPackage}</value></property>
+    </bean>
     <!--JDBC事务管理器-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
           p:dataSource-ref="dataSource"/>
     <!--启用支持annotation注解方式管理事务-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--自动扫描-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="persistence.mybatis.interfaces" />
+    </bean>
+
 </beans>

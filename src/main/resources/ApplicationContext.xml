@@ -7,4 +7,5 @@
 
     <import resource="MyBatis-config.xml"/>
     <import resource="SpringMVC-config.xml"/>
+    <import resource="MyBatis-Beans.xml"/>
 </beans>

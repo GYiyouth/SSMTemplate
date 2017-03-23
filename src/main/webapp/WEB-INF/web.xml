@@ -36,7 +36,7 @@
     <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
   </listener>
 
-    <!--SpringMVC的Servlet-->
+    <!--SpringMVC 注册的 Servlet-->
     <servlet>
         <servlet-name>SpringMVC</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
