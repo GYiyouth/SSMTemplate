@@ -19,7 +19,7 @@
         <property name="location"><value>classpath:mapper-config.properties</value></property>
     </bean>
 
-    <!--MyBatis注解式接口扫描包-->
+    <!--MyBatis注解式接口扫描包，不能用-->
     <mybatis:scan base-package="persistence.mybatis.interfaces"/>
     <!--加载数据源参数-->
     <context:property-override location="classpath:MySQLDB1.properties"/>
@@ -28,10 +28,7 @@
     <!--Mybatis整合Spring-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!--指明mapper所在的位置-->
-        <property name="mapperLocations"><value>${mapperLocations}</value></property>
-        <!--指明别名可以用的package-->
-        <property name="typeAliasesPackage"><value>${typeAliasesPackage}</value></property>
+        <property name="configLocation" value="classpath:MyBatis.xml"/>
     </bean>
     <!--JDBC事务管理器-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
@@ -39,9 +36,13 @@
     <!--启用支持annotation注解方式管理事务-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <!--自动扫描-->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="persistence.mybatis.interfaces" />
-    </bean>
+    <!--自动扫描，也不行-->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--&lt;!&ndash; 扫描包路径,如果需要扫描多个包中间用半角逗号隔开 &ndash;&gt;-->
+        <!--<property name="basePackage" value="persistence.mybatis.interfaces" />-->
+        <!--&lt;!&ndash; 这边不能使用ref="sqlSessionFactory"原因是因为上面加载配置文件导致这边引用会报错 &ndash;&gt;-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />-->
+
+    <!--</bean>-->
 
 </beans>

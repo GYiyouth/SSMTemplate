@@ -8,13 +8,13 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 
-    <bean id="test3" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="persistence.mybatis.interfaces.Test3"/>
+    <bean id="testTest" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="persistence.mybatis.interfaces.TestTest"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
     <bean id="test2" class="persistence.mybatis.interfaces.Test2">
         <property name="test1" ref="test1"/>
-        <property name="test3" ref="test3"/>
+        <property name="testTest" ref="testTest"/>
     </bean>
 </beans>

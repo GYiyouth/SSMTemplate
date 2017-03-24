@@ -5,7 +5,7 @@ package persistence.mybatis.interfaces;
  */
 public class Test2 {
     private Test1 test1;
-    private Test3 test3;
+    private TestTest testTest;
 
     public Test1 getTest1() {
         return test1;
@@ -15,11 +15,11 @@ public class Test2 {
         this.test1 = test1;
     }
 
-    public Test3 getTest3() {
-        return test3;
+    public TestTest getTestTest() {
+        return testTest;
     }
 
-    public void setTest3(Test3 test3) {
-        this.test3 = test3;
+    public void setTestTest(TestTest testTest) {
+        this.testTest = testTest;
     }
 }

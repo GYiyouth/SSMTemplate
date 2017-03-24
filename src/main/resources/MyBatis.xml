@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTO Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!--开启懒加载设置-->
+        <!--懒加载全局开关，开启时，所有的 关联对象 都会延迟加载，默认false-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--启用时，带有延迟加载属性的对象立即加载，反之，每种属性将按需加载。默认为true-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!--控制台显示SQL语句-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--<setting name="cacheEnabled" value="true"/>-->
+    </settings>
+
+    <!--设置别名-->
+    <!--<typeAliases>-->
+        <!--<typeAlias type="mybatis.User" alias="user"/>-->
+        <!--<package name="mybatis"/>-->
+    <!--</typeAliases>-->
+
+
+
+    <!--环境配置，即链接的数据库，启用后，spring里设置的datasource不再生效-->
+    <!--<environments default="mysql">-->
+        <!--<environment id="mysql">-->
+            <!--<transactionManager type="JDBC"/>-->
+            <!--<dataSource type="POOLED">-->
+                <!--<property name="driver" value="com.mysql.jdbc.Driver"/>-->
+                <!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>-->
+                <!--<property name="username" value="root"/>-->
+                <!--<property name="password" value="686995"/>-->
+            <!--</dataSource>-->
+        <!--</environment>-->
+    <!--</environments>-->
+    <!--OR映射的配置文件-->
+    <mappers>
+        <!--由于前面配置了自动扫描，这里其实不用写-->
+        <!--<mapper class="persistence.mybatis.interfaces.TestTest"/>-->
+        <!--在这里写，或者在前面的SqlSessionFactory的property写，效果是一样的-->
+        <mapper resource="mapper/xml-config/test.xml"/>
+        <!--下面这样写，找不到-->
+        <!--<mapper resource="classpath:persistence/mybatis/interfaces/Test3.xml"/>-->
+        <!--<mapper resource="mybatis/C10-N-N-mapper/ArticleMapper.xml"/>-->
+        <!--<mapper resource="mybatis/C10-N-N-mapper/OrderMapper.xml"/>-->
+        <!--<mapper resource="mybatis/C10-N-N-mapper/User3Mapper.xml"/>-->
+        <!--在这里设置package也没用，而且这个包内，不能包含在别的地方注册过的映射关系-->
+        <!--<package name="persistence.C10-N-N-mapper"/>-->
+    </mappers>
+
+</configuration>

@@ -8,6 +8,6 @@ public class Test {
     public static void main(String[] args) {
         Test2 test2 = BeanFactory.getBean("test2", Test2.class);
         System.out.println(test2.getTest1().select1());
-//        System.out.println(test2.getTest3().select1());
+        System.out.println(test2.getTestTest().select1());
     }
 }

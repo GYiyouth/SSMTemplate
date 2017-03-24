@@ -5,7 +5,7 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        ">
 
-    <import resource="MyBatis-config.xml"/>
+    <!--<import resource="MyBatis-config.xml"/>-->
     <import resource="SpringMVC-config.xml"/>
-    <import resource="MyBatis-Beans.xml"/>
+    <!--<import resource="MyBatis-Beans.xml"/>-->
 </beans>
