@@ -2,6 +2,7 @@ package tool.com;
 
 import net.sf.json.JSONObject;
 import org.hibernate.SessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -22,8 +23,8 @@ public class BeanFactory {
     public static ApplicationContext getNewContext(){
         return new ClassPathXmlApplicationContext("ApplicationContext.xml");
     }
-    public static SessionFactory getSessionFactory(){
-        return getApplicationContext().getBean("sessionFactory", SessionFactory.class);
+    public static SqlSessionFactoryBean getSessionFactory(){
+        return getApplicationContext().getBean("sqlSessionFactory", SqlSessionFactoryBean.class);
     }
     public static JSONObject getJSONO(){
         return getBean("jsonObject", JSONObject.class);
