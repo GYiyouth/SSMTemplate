@@ -1,48 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd
-        http://mybatis.org/schema/mybatis-spring
-        http://mybatis.org/schema/mybatis-spring.xsd">
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTO Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
 
-    <!--使用一个属性文件配置-->
-    <bean id="configBean" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location"><value>classpath:mapper-config.properties</value></property>
-    </bean>
+    <settings>
+        <!--开启懒加载设置-->
+        <!--懒加载全局开关，开启时，所有的 关联对象 都会延迟加载，默认false-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--启用时，带有延迟加载属性的对象立即加载，反之，每种属性将按需加载。默认为true-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!--控制台显示SQL语句-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--<setting name="cacheEnabled" value="true"/>-->
+    </settings>
 
-    <!--MyBatis注解式接口扫描包，不能用-->
-    <mybatis:scan base-package="persistence.mybatis.interfaces"/>
-    <!--加载数据源参数-->
-    <context:property-override location="classpath:MySQLDB1.properties"/>
-    <!--配置c3p0数据源-->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"/>
-    <!--Mybatis整合Spring-->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:MyBatis.xml"/>
-    </bean>
-    <!--JDBC事务管理器-->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-          p:dataSource-ref="dataSource"/>
-    <!--启用支持annotation注解方式管理事务-->
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!--设置别名-->
+    <!--<typeAliases>-->
+        <!--<typeAlias type="mybatis.User" alias="user"/>-->
+        <!--<package name="mybatis"/>-->
+    <!--</typeAliases>-->
 
-    <!--自动扫描，也不行-->
-    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
-        <!--&lt;!&ndash; 扫描包路径,如果需要扫描多个包中间用半角逗号隔开 &ndash;&gt;-->
-        <!--<property name="basePackage" value="persistence.mybatis.interfaces" />-->
-        <!--&lt;!&ndash; 这边不能使用ref="sqlSessionFactory"原因是因为上面加载配置文件导致这边引用会报错 &ndash;&gt;-->
-        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />-->
 
-    <!--</bean>-->
 
-</beans>
+    <!--环境配置，即链接的数据库，启用后，spring里设置的datasource不再生效-->
+    <!--<environments default="mysql">-->
+        <!--<environment id="mysql">-->
+            <!--<transactionManager type="JDBC"/>-->
+            <!--<dataSource type="POOLED">-->
+                <!--<property name="driver" value="com.mysql.jdbc.Driver"/>-->
+                <!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>-->
+                <!--<property name="username" value="root"/>-->
+                <!--<property name="password" value="686995"/>-->
+            <!--</dataSource>-->
+        <!--</environment>-->
+    <!--</environments>-->
+    <!--OR映射的配置文件-->
+    <mappers>
+        <!--由于前面配置了自动扫描，这里其实不用写-->
+        <!--<mapper class="persistence.mybatis.interfaces.TestTest"/>-->
+        <!--在这里写，或者在前面的SqlSessionFactory的property写，效果是一样的-->
+        <mapper resource="mapper/xml-config/test.xml"/>
+        <!--下面这样写，找不到-->
+        <!--<mapper resource="classpath:persistence/mybatis/interfaces/Test3.xml"/>-->
+        <!--<mapper resource="mybatis/C10-N-N-mapper/ArticleMapper.xml"/>-->
+        <!--<mapper resource="mybatis/C10-N-N-mapper/OrderMapper.xml"/>-->
+        <!--<mapper resource="mybatis/C10-N-N-mapper/User3Mapper.xml"/>-->
+        <!--在这里设置package也没用，而且这个包内，不能包含在别的地方注册过的映射关系-->
+        <!--<package name="persistence.C10-N-N-mapper"/>-->
+    </mappers>
+
+</configuration>

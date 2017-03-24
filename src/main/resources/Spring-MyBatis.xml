@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://mybatis.org/schema/mybatis-spring
+        http://mybatis.org/schema/mybatis-spring.xsd">
+
+    <!--使用一个属性文件配置-->
+    <bean id="configBean" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location"><value>classpath:mapper-config.properties</value></property>
+    </bean>
+
+    <!--MyBatis注解式接口扫描包，不能用-->
+    <mybatis:scan base-package="persistence.mybatis.interfaces"/>
+    <!--加载数据源参数-->
+    <context:property-override location="classpath:MySQLDB1.properties"/>
+    <!--配置c3p0数据源-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"/>
+    <!--Mybatis整合Spring-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:MyBatis-config.xml"/>
+    </bean>
+    <!--JDBC事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource"/>
+    <!--启用支持annotation注解方式管理事务-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--自动扫描，也不行-->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--&lt;!&ndash; 扫描包路径,如果需要扫描多个包中间用半角逗号隔开 &ndash;&gt;-->
+        <!--<property name="basePackage" value="persistence.mybatis.interfaces" />-->
+        <!--&lt;!&ndash; 这边不能使用ref="sqlSessionFactory"原因是因为上面加载配置文件导致这边引用会报错 &ndash;&gt;-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />-->
+
+    <!--</bean>-->
+
+</beans>

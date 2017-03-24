@@ -5,8 +5,8 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        ">
 
-    <!--<import resource="MyBatis-config.xml"/>-->
+    <!--<import resourSpring-MyBatis.xml.xml"/>-->
     <import resource="SpringMVC-config.xml"/>
     <!--<import resource="MyBatis-Beans.xml"/>-->
-    <import resource="classpath:Spring-cache.xml"/>
+    <import resource="Spring-cache.xml"/>
 </beans>
