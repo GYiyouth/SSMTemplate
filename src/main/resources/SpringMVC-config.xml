@@ -11,9 +11,6 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
     <!--基于注解-->
 
-    <!--自动扫描base-package内的Java文件
-        如果扫描到有Spring的相关注解的类，则把他们注册为Spring的Bean-->
-    <context:component-scan base-package="controller"/>
     <!--注解类型的处理映射器-->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
     <!--注解类型的处理器适配器-->

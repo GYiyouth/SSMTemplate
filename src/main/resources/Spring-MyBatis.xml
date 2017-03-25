@@ -14,17 +14,24 @@
         http://mybatis.org/schema/mybatis-spring
         http://mybatis.org/schema/mybatis-spring.xsd">
 
-    <!--使用一个属性文件配置-->
-    <bean id="configBean" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location"><value>classpath:mapper-config.properties</value></property>
-    </bean>
 
-    <!--MyBatis注解式接口扫描包，不能用-->
+
+
+    <!--MyBatis注解式接口扫描包-->
     <mybatis:scan base-package="persistence.mybatis.interfaces"/>
-    <!--加载数据源参数-->
-    <context:property-override location="classpath:MySQLDB1.properties"/>
+    <!--加载数据源参数，如果通过这种方式加载，会出现中文乱码-->
+    <!--<context:property-override location="classpath:MySQLDB1.properties"/>-->
     <!--配置c3p0数据源-->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"/>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close"
+          p:driverClass="com.mysql.jdbc.Driver"
+          p:jdbcUrl="jdbc:mysql://localhost:3306/____________?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"
+          p:user="____"
+          p:password="_____"
+          p:maxPoolSize="40"
+          p:minPoolSize="2"
+          p:initialPoolSize="2"
+          p:maxIdleTime="30"/>
     <!--Mybatis整合Spring-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -36,7 +43,7 @@
     <!--启用支持annotation注解方式管理事务-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <!--自动扫描，也不行-->
+    <!--自动扫描的另一种实现方式-->
     <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
         <!--&lt;!&ndash; 扫描包路径,如果需要扫描多个包中间用半角逗号隔开 &ndash;&gt;-->
         <!--<property name="basePackage" value="persistence.mybatis.interfaces" />-->
