@@ -9,4 +9,5 @@
     <import resource="SpringMVC-config.xml"/>
     <!--<import resource="MyBatis-Beans.xml"/>-->
     <import resource="Spring-cache.xml"/>
+    <import resource="Spring-AOP.xml"/>
 </beans>
