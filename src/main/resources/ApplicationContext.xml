@@ -7,7 +7,8 @@
 
     <!--自动扫描base-package内的Java文件
         如果扫描到有Spring的相关注解的类，则把他们注册为Spring的Bean-->
-    <context:component-scan base-package="controller,persistence,pojo,tool"/>
+    <!--Controller的文件夹，要注册在SpringMVC-config.xml里-->
+    <context:component-scan base-package="persistence,pojo,tool"/>
 
     <!--<import resourSpring-MyBatis.xml.xml"/>-->
     <import resource="SpringMVC-config.xml"/>

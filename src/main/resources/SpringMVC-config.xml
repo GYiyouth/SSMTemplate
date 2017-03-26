@@ -10,6 +10,9 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
     <!--基于注解-->
+    <!--这里必须要写上扫描的包，不然起不到servlet的作用-->
+    <!--跟根目录那里的配置不一样-->
+    <context:component-scan base-package="controller"/>
 
     <!--注解类型的处理映射器-->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
